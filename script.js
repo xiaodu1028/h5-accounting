@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    loadRecords();
+    loadRecords();  // 页面加载时，加载已有的记录
 });
 
 function saveRecord() {
@@ -15,9 +15,12 @@ function saveRecord() {
     }
 
     const record = { amount, category, date, note };
-    
+
     // 获取现有记录，若没有则初始化为空数组
-    let records = JSON.parse(localStorage.getItem("records")) || [];
+    let records = JSON.parse(localStorage.getItem("records"));
+    if (!records) {
+        records = [];  // 如果没有记录，初始化为一个空数组
+    }
 
     // 将新记录加入现有记录数组
     records.push(record);
@@ -37,9 +40,12 @@ function saveRecord() {
 
 function loadRecords() {
     const recordsList = document.getElementById("recordsList");
-    recordsList.innerHTML = ""; // 清空现有列表
-    let records = JSON.parse(localStorage.getItem("records")) || []; // 获取存储的记录
+    recordsList.innerHTML = "";  // 清空现有列表
 
+    // 获取存储的记录，如果没有则初始化为空数组
+    let records = JSON.parse(localStorage.getItem("records")) || [];
+
+    // 遍历所有记录并渲染
     records.forEach((record, index) => {
         let li = document.createElement("li");
         li.innerHTML = `${record.date} - ${record.category} - ¥${record.amount} <span onclick="deleteRecord(${index})" style="color:red; cursor:pointer;">X</span>`;
@@ -51,6 +57,8 @@ function deleteRecord(index) {
     // 获取现有记录，移除指定项并更新存储
     let records = JSON.parse(localStorage.getItem("records")) || [];
     records.splice(index, 1);
+
+    // 更新存储
     localStorage.setItem("records", JSON.stringify(records));
 
     // 重新加载记录列表
