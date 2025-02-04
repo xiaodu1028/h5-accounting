@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>记账小程序</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>记一笔</h2>
+        
+        <label>金额</label>
+        <input type="number" id="amount" placeholder="输入金额">
+        
+        <label>分类</label>
+        <select id="category">
+            <option value="">选择分类</option>
+            <option value="餐饮">餐饮</option>
+            <option value="购物">购物</option>
+            <option value="娱乐">娱乐</option>
+            <option value="交通">交通</option>
+            <option value="其他">其他</option>
+        </select>
+
+        <label>日期</label>
+        <input type="date" id="date">
+
+        <label>备注</label>
+        <textarea id="note" placeholder="备注（可选）"></textarea>
+
+        <button onclick="saveRecord()">保存</button>
+
+        <h3>消费记录</h3>
+        <ul id="recordsList"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
